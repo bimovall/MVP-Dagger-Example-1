@@ -26,6 +26,7 @@ public class ProductPresenter extends MvpBasePresenter<ProductView> {
         boolean valid = true;
         if (isViewAttached()) {
             getView().showLoading();
+
         }
         if (TextUtils.isEmpty(productName) && TextUtils.isEmpty(productDesc) &&
                 TextUtils.isEmpty(productQty) && TextUtils.isEmpty(productSalePrice)) {
@@ -58,13 +59,17 @@ public class ProductPresenter extends MvpBasePresenter<ProductView> {
             product.setQuantity(Integer.parseInt(productQty));
             product.setSalePrice(Double.parseDouble(productSalePrice));
 
-            mCart.addItemToCart(product);
-            mCart.saveCartToPreference();
 
-            if (mCart.showItemList().get(mCart.showItemList().size()-1).getProductName().equals(product.getProductName())){
-                getView().showErrorMessage("Item Already Existed");
-            }else{
+            if (mCart.showItemList().size() != 0) {
+                if (mCart.showItemList().get(mCart.showItemList().size() - 1).getProductName().equals(product.getProductName())) {
+                    getView().showErrorMessage("Item Already Existed");
+                } else {
+                    mCart.addItemList(product);
+                    getView().showSuccessMessage("Success Insert Product");
+                }
+            }else {
                 mCart.addItemList(product);
+                getView().showSuccessMessage("Success Insert Product");
             }
         }
 

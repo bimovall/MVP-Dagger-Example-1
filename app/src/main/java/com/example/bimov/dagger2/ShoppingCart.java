@@ -57,12 +57,19 @@ public class ShoppingCart {
     }
 
     public void addItemToCart(Product item) {
-        if (shoppingCart.contains(item)) {
+       /* if (shoppingCart.contains(item)) {
             int currentPosition = shoppingCart.indexOf(item);
             Product itemAlreadyInCart = shoppingCart.get(currentPosition);
             itemAlreadyInCart.setQuantity(itemAlreadyInCart.getQuantity() - item.getQuantity());
             shoppingCart.set(currentPosition, itemAlreadyInCart);
         } else {
+            shoppingCart.add(item);
+            Gson gson = new Gson();
+            String serializedItems = gson.toJson(shoppingCart);
+            editor.putString(SERIALIZED_CART_ITEMS, serializedItems).commit();
+        }*/
+
+        if (!shoppingCart.contains(item)) {
             shoppingCart.add(item);
             Gson gson = new Gson();
             String serializedItems = gson.toJson(shoppingCart);
