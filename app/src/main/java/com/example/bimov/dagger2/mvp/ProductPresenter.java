@@ -26,6 +26,7 @@ public class ProductPresenter extends MvpBasePresenter<ProductView> {
         boolean valid = true;
         if (isViewAttached()) {
             getView().showLoading();
+
         }
         if (TextUtils.isEmpty(productName) && TextUtils.isEmpty(productDesc) &&
                 TextUtils.isEmpty(productQty) && TextUtils.isEmpty(productSalePrice)) {
